@@ -6,6 +6,8 @@ In place editor with event delegation support.
 How to use
 ----------
 
+you could create an instance this way
+
 	//make every div that is a form child node editable
 	var inplace = new InPlaceEditor($$('form > div'), {
 	
@@ -20,6 +22,24 @@ How to use
 							}
 						});
 						
+or this way, you can attach elements later
+					
+	//make every div that is a form child node editable
+	var inplace = new InPlaceEditor({
+	
+							properties: {
+							
+								rows: 3,
+								cols: 18
+							},
+							onChange: function (div, value, oldValue) {
+
+								//do something
+							}
+						});
+						
+	inplace.attach('form > div');
+							
 # InPlaceEditor Options:
 
 - property - (*string*, optional) element property to edit. possible values are *text* and *html*. default to *text*
