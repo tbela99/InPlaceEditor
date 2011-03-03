@@ -8,8 +8,15 @@ copyright: Copyright (c) 2010 Thierry Bela
 authors: [Thierry Bela]
 
 requires: 
-  core:1.3.1:*
-  more:1.3.1:*
+  core:1.3.1:
+  - Class.Extras
+  - Element.Event
+  - Element.Style
+  - Element.Dimensions
+  - Fx.Tween
+  - Array
+  more:1.3.1:
+  - Element.Delegation
   
 provides: [InPlaceEditor]
 ...
