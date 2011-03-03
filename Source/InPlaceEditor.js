@@ -10,8 +10,7 @@ authors: [Thierry Bela]
 requires: 
   core:1.3.1
   more:1.3.1
-provides: 
-	InPlaceEditor
+provides: [InPlaceEditor]
 ...
 */
 

@@ -9,8 +9,7 @@ authors: [Thierry Bela]
 
 requires: 
   InPlaceEditor
-provides: 
-	InPlaceEditor.Delegation
+provides: [InPlaceEditor.Delegation]
 ...
 */
 
