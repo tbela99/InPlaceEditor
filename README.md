@@ -3,6 +3,22 @@ InPlaceEditor
 
 In place editor with event delegation support.
 
+#How to Use:
+
+	//make every div that is a form child node editable
+	var inplace = new InPlaceEditor($$('form > div'), {
+	
+							properties: {
+							
+								rows: 3,
+								cols: 18
+							},
+							onChange: function (div, value, oldValue) {
+
+								//do something
+							}
+						});
+						
 # InPlaceEditor Options:
 
 - property - (*string*, optional) element property to edit. possible values are *text* and *html*. default to *text*
@@ -51,19 +67,3 @@ remove InPlaceEditor behaviors to elements
 ## Arguments:
 
 elements - (*mixed*) elements.
-
-### Javascript:
-
-	//make every div that is a form child node editable
-	var inplace = new InPlaceEditor($$('form > div'), {
-	
-							properties: {
-							
-								rows: 3,
-								cols: 18
-							},
-							onChange: function (div, value, oldValue) {
-
-								//do something
-							}
-						});
