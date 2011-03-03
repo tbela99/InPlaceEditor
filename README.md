@@ -6,7 +6,9 @@ In place editor with event delegation support.
 How to use
 ----------
 
-you could create an instance this way
+you could create an instance this way:
+
+### Javascript:
 
 	//make every div that is a form child node editable
 	var inplace = new InPlaceEditor($$('form > div'), {
@@ -23,7 +25,9 @@ you could create an instance this way
 						});
 						
 or this way, you can attach elements later
-					
+	
+### Javascript:
+				
 	//make every div that is a form child node editable
 	var inplace = new InPlaceEditor({
 	
@@ -40,7 +44,7 @@ or this way, you can attach elements later
 						
 	inplace.attach('form > div');
 							
-# InPlaceEditor Options:
+## InPlaceEditor Options:
 
 - property - (*string*, optional) element property to edit. possible values are *text* and *html*. default to *text*
 - element - (*string*, optional) editor HTML tag. possible values as *input*, *textarea*. default to *textarea*
@@ -51,9 +55,9 @@ or this way, you can attach elements later
 - validate - (*function*, optional) function that validates user input, return true if the input is valid.
 
 
-# InPlaceEditor Events:
+## InPlaceEditor Events:
 
-## onChange
+### onChange
 
 fire when the element content has been edited.
 
@@ -63,28 +67,28 @@ fire when the element content has been edited.
 - value - (*string*) the new element content
 - oldValue - (*string*) the previous element content
 	
-# Element Method: attach
+## Element Method: attach
 ------------
 
 attach InPlaceEditor behaviors to elements
 
-## Returns:
+### Returns:
 
 * this InPlaceEditor instance
 
-## Arguments:
+### Arguments:
 
 elements - (*mixed*) elements.
 
-# Element Method: attach
+## Element Method: attach
 ------------
 
 remove InPlaceEditor behaviors to elements
 
-## Returns:
+### Returns:
 
 * this InPlaceEditor instance
 
-## Arguments:
+### Arguments:
 
 elements - (*mixed*) elements.
