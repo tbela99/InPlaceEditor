@@ -3,7 +3,8 @@ InPlaceEditor
 
 In place editor with event delegation support.
 
-#How to Use:
+How to use
+----------
 
 	//make every div that is a form child node editable
 	var inplace = new InPlaceEditor($$('form > div'), {
