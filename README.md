@@ -72,23 +72,23 @@ fire when the element content has been edited.
 
 attach InPlaceEditor behaviors to elements
 
-### Returns:
+## Returns:
 
 * this InPlaceEditor instance
 
-### Arguments:
+## Arguments:
 
 elements - (*mixed*) elements.
 
-## Element Method: attach
+# Element Method: detach
 ------------
 
-remove InPlaceEditor behaviors to elements
+remove InPlaceEditor behaviors from elements
 
-### Returns:
+## Returns:
 
 * this InPlaceEditor instance
 
-### Arguments:
+## Arguments:
 
 elements - (*mixed*) elements.
