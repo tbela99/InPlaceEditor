@@ -2,8 +2,5 @@ name: InPlaceEditor
 author: tbela99
 category: Interface
 tags: [inplace, edit, editor]
-<<<<<<< HEAD
-=======
-demo: https://tbela99.github.com/InPlaceEditor/Demos/index.html
->>>>>>> gh-pages
+demo: http://tbela99.github.com/InPlaceEditor/Demos/index.html
 current: 1.0
