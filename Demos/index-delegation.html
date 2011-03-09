@@ -1,0 +1,96 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"><head>
+
+
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<title>InPlaceEditor</title>
+<style type="text/css">
+html {
+
+	font-family:Arial, Helvetica, sans-serif;
+	color: #333;
+	font-size:1.2em;
+}
+body {
+
+	line-height:1.2;
+}
+
+.text, .html {
+
+	border: 1px solid #d1d1d1;
+	margin: 0 0 10px;
+	padding: 3px 5px;
+}
+
+form {
+
+	width: 400px;
+	margin: 0 auto;
+}
+
+textarea, input[type=text] {
+
+	border: 1px solid #D1D1D1;
+	width: 99%;	
+}
+
+.html + span, .text + span {
+
+	margin-bottom: 10px;
+	display: block;
+}
+.html + span a, .text + span a {
+
+	font-size: 60%;
+	text-decoration: none;
+	color: #e00;
+}
+.html + span a ~ a, .text + span a ~ a {
+
+	font-size: 90%;
+	text-decoration: none;
+	color: #00e;   
+	text-transform: uppercase;
+}
+
+</style>
+<script type="text/javascript" src="../mootools.js"></script>
+<script type="text/javascript" src="../Source/InPlaceEditor.js"></script>
+<script type="text/javascript" src="../Source/InPlaceEditor.Delegation.js"></script>
+
+<script type="text/javascript">
+//<![CDATA[
+
+	window.addEvent('domready', function () {
+
+		new InPlaceEditor.Delegation('form',{
+							relay: '.text',
+							property: 'text', 
+							onChange: function () {
+
+							
+								console.log(arguments)
+							}
+						});
+		new InPlaceEditor.Delegation('form', {
+							relay: '.html',
+							property: 'html', 
+							onChange: function () {
+
+							
+								console.log(arguments)
+							}
+		
+		});
+	})
+//]]></script>
+</head><body>
+		<form action="" method="get">
+       
+			<div class="text">edit text</div>
+			<div class="text">edit text too</div>
+			<div class="html"><span>edit HTML</span></div>
+			<div class="html"><span>edit HTML too</span></div>
+		</form>
+</body></html>
