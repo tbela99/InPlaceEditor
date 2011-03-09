@@ -28,7 +28,12 @@ InPlaceEditor.Delegation = new Class({
 
 			var self = this,
 				options = this.options,
+<<<<<<< HEAD
 				property = 'backgroundColor';
+=======
+				property = 'backgroundColor',
+				relay = ':relay(' + options.relay + ')';
+>>>>>>> gh-pages
 
 			return [
 						function(e, el) { el.tween(property, options.toColor) },
@@ -42,6 +47,10 @@ InPlaceEditor.Delegation = new Class({
 								self.build(el)
 						}
 
+<<<<<<< HEAD
 					].associate(['mouseenter:relay(' + options.relay + ')', 'mouseleave:relay(' + options.relay + ')', 'click:relay(' + options.relay + ')'])
+=======
+					].associate(['mouseenter' + relay, 'mouseleave' + relay, 'click' + relay])
+>>>>>>> gh-pages
 		}
 });

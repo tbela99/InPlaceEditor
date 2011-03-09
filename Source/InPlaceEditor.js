@@ -60,6 +60,7 @@ var InPlaceEditor = new Class({
 				property = 'backgroundColor';
 
 			return {
+<<<<<<< HEAD
 						mouseenter: function() { this.tween(property, options.toColor) },
 						mouseleave: function() { this.tween(property, options.fColor).get('tween').chain(function () { this.setStyle(property, this.retrieve('eip-color')) }.bind(this)) },
 						click: function(e) {
@@ -68,6 +69,16 @@ var InPlaceEditor = new Class({
 							self.build(this)
 						}
 					}
+=======
+					mouseenter: function() { this.tween(property, options.toColor) },
+					mouseleave: function() { this.tween(property, options.fColor).get('tween').chain(function () { this.setStyle(property, this.retrieve('eip-color')) }.bind(this)) },
+					click: function(e) {
+
+						e.stop();
+						self.build(this)
+					}
+				}
+>>>>>>> gh-pages
 
 		},
 		build: function (el) {
@@ -111,7 +122,11 @@ var InPlaceEditor = new Class({
 						el.style.display = el.retrieve('eip-display');
 
 						//validate input
+<<<<<<< HEAD
 						if(options.validate(textarea.value) && textarea.value != oldValue) this.fireEvent('change', [el.set(options.property, textarea.value), textarea.value, oldValue]);
+=======
+						if(options.validate(textarea.value) && textarea.value != oldValue) this.fireEvent('change', [el.set(options.property, textarea.value), el.get(options.property), oldValue]);
+>>>>>>> gh-pages
 						container.destroy()
 
 					}.bind(this)

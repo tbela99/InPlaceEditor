@@ -2,6 +2,11 @@ InPlaceEditor
 ============
 
 In place editor with event delegation support.
+<<<<<<< HEAD
+=======
+[Demo](http://tbela99.github.com/InPlaceEditor/Demos/index.html)
+[Demo with event delegation](http://tbela99.github.com/InPlaceEditor/Demos/index-delegation.html)
+>>>>>>> gh-pages
 
 How to use
 ----------
