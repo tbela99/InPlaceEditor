@@ -51,4 +51,4 @@ provides: [InPlaceEditor.Delegation]
 			}
 	})
 	
-})(this);;
+})(this);
