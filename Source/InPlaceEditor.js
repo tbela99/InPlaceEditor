@@ -22,16 +22,25 @@ provides: [InPlaceEditor]
 ...
 */
 
-var InPlaceEditor = new Class({
+(function (context) {
+
+"use strict";
+
+context.InPlaceEditor = new Class({
 
 		options: {
 
 			//property: html/text
+			//editor wrapper
+			wrapper: 'span',
+			//text, html
 			property: 'text',
 			element: 'textarea',
 			toColor: "#e1ecf5",
 			fColor: "#fff",
 			newLine: true,
+			//Apply - Cancel separator
+			separator: '&nbsp;',
 			//function that take user input as parameter and return true or false to indicate whether the input is valid
 			validate: function (value) { return !!value.trim() },
 			properties: {
@@ -44,12 +53,12 @@ var InPlaceEditor = new Class({
 		Implements: [Events, Options],
 		initialize: function() {
 
-			var params = Array.link(arguments, {options: Type.isObject, elements: function(obj) { return (obj != null) } });
+			var params = Array.link(Array.slice(arguments), {options: Type.isObject, elements: function(obj) { return (obj != null) } });
 
 			this.setOptions(params.options);
 
 			this.events = this.getEvents();
-
+			
 			if(params.elements) this.attach(params.elements)
 		},
 
@@ -60,7 +69,6 @@ var InPlaceEditor = new Class({
 				property = 'backgroundColor';
 
 			return {
-<<<<<<< HEAD
 						mouseenter: function() { this.tween(property, options.toColor) },
 						mouseleave: function() { this.tween(property, options.fColor).get('tween').chain(function () { this.setStyle(property, this.retrieve('eip-color')) }.bind(this)) },
 						click: function(e) {
@@ -69,23 +77,14 @@ var InPlaceEditor = new Class({
 							self.build(this)
 						}
 					}
-=======
-					mouseenter: function() { this.tween(property, options.toColor) },
-					mouseleave: function() { this.tween(property, options.fColor).get('tween').chain(function () { this.setStyle(property, this.retrieve('eip-color')) }.bind(this)) },
-					click: function(e) {
-
-						e.stop();
-						self.build(this)
-					}
-				}
->>>>>>> gh-pages
 
 		},
 		build: function (el) {
 
+
 			var options = this.options,
 				oldValue = el.get(options.property),
-				container = new Element('span').injectAfter(el),
+				container = new Element(options.wrapper).inject(el, 'after'),
 				textarea = new Element(options.element, options.properties).set('value', oldValue).inject(container);
 
 			el.setStyles({display:'none', backgroundColor: options.fColor});
@@ -94,7 +93,7 @@ var InPlaceEditor = new Class({
 			if(options.newLine) new Element('br').inject(container);
 
 			//cancel
-			new Element('a', {
+			container.grab(new Element('a', {
 
 							href: 'javascript:;',
 							html: 'Cancel',
@@ -106,15 +105,16 @@ var InPlaceEditor = new Class({
 								}
 							}
 
-						}).inject(container);
+						}));
 
 			//seperator
-			new Element('span', {html: '&nbsp;'}).inject(container);
+			if(options.separator) container.grab(new Element('span', {html: typeof options.separator == 'boolean' ? '&nbsp;' : options.separator}));
 
 			//save
-			new Element('a', {
+			container.grab(new Element('a', {
 
-				href: 'javascript:;', html: 'Save',
+				href: 'javascript:;', 
+				html: 'Save',
 				events: {
 
 					click: function() {
@@ -122,17 +122,13 @@ var InPlaceEditor = new Class({
 						el.style.display = el.retrieve('eip-display');
 
 						//validate input
-<<<<<<< HEAD
-						if(options.validate(textarea.value) && textarea.value != oldValue) this.fireEvent('change', [el.set(options.property, textarea.value), textarea.value, oldValue]);
-=======
 						if(options.validate(textarea.value) && textarea.value != oldValue) this.fireEvent('change', [el.set(options.property, textarea.value), el.get(options.property), oldValue]);
->>>>>>> gh-pages
 						container.destroy()
 
 					}.bind(this)
 				}
 
-			}).inject(container);
+			}));
 
 			return this
 		},
@@ -140,7 +136,7 @@ var InPlaceEditor = new Class({
 
 			$$(elements).each(function (el) {
 
-				el.store('eip-color', el.getStyle('backgroundColor')).
+				el.store('eip-color', el.style.backgroundColor).
 					store('eip-display', el.style.display).
 					set({tween: {link: 'chain'}, events: this.events})
 
@@ -154,4 +150,6 @@ var InPlaceEditor = new Class({
 
 			return this
 		}
-});
+	})
+})(this);
+

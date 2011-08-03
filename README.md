@@ -49,6 +49,7 @@ or this way, you can attach elements later
 							
 ## InPlaceEditor Options:
 
+- wrapper - (*string*, optional) HTML tag for the editor wrapper. default to *span*
 - property - (*string*, optional) element property to edit. possible values are *text* and *html*. default to *text*
 - element - (*string*, optional) editor HTML tag. possible values as *input*, *textarea*. default to *textarea*
 - toColor - (*string*, optional) when the mouse enter the element, change its background color to this value
