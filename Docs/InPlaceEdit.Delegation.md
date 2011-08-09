@@ -5,7 +5,7 @@ extends InPlaceEditor with event delegation.
 
 # InPlaceEditor.Delegation Options:
 
-- relay (*string*) selector
+- relay (*mixed*) selector
 
 ### Javascript:
 

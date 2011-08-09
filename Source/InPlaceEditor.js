@@ -47,7 +47,10 @@ context.InPlaceEditor = new Class({
 
 				rows: 2,
 				cols: 32
-			}
+			},
+			className: 'inplace-edit',
+			cancelMsg: 'Cancel',
+			OKMsg: 'SAVE'
 		},
 
 		Implements: [Events, Options],
@@ -84,7 +87,7 @@ context.InPlaceEditor = new Class({
 
 			var options = this.options,
 				oldValue = el.get(options.property),
-				container = new Element(options.wrapper).inject(el, 'after'),
+				container = new Element(options.wrapper, {'class': options.className}).inject(el, 'after'),
 				textarea = new Element(options.element, options.properties).set('value', oldValue).inject(container);
 
 			el.setStyles({display:'none', backgroundColor: options.fColor});
@@ -93,10 +96,8 @@ context.InPlaceEditor = new Class({
 			if(options.newLine) new Element('br').inject(container);
 
 			//cancel
-			container.grab(new Element('a', {
+			container.grab(new Element('input[type=reset][value=' + options.cancelMsg + ']', {
 
-							href: 'javascript:;',
-							html: 'Cancel',
 							events:{
 									click: function() {
 
@@ -111,10 +112,8 @@ context.InPlaceEditor = new Class({
 			if(options.separator) container.grab(new Element('span', {html: typeof options.separator == 'boolean' ? '&nbsp;' : options.separator}));
 
 			//save
-			container.grab(new Element('a', {
+			container.grab(new Element('input[type=submit][value=' + options.OKMsg + ']', {
 
-				href: 'javascript:;', 
-				html: 'Save',
 				events: {
 
 					click: function() {

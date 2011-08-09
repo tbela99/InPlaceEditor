@@ -13,6 +13,9 @@ In place editor
 - newLine - (*boolean*, optional) insert a new line between the editor and cancel/save buttons
 - properties - (*object*, optional) editor properties. for example for textarea, you may want to set the number of rows, columns for textarea, size for input, etc.
 - validate - (*function*, optional) function that validates user input, return true if the input is valid.
+- className - (*string*, optional) class name form the editor wrapper. default to *inplace-edit*
+- cancelMsg - (*string*, optional) value of the cancel button. default to *cancel*
+- OKMsg - (*string*, optional) value of the OK button. default to *SAVE*
 
 
 # InPlaceEditor Events:
