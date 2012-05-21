@@ -33,6 +33,8 @@ context.InPlaceEditor = new Class({
 			//property: html/text
 			//editor wrapper
 			wrapper: 'span',
+			//display buttons or save on blur and cancel when pressing esc
+			buttons: true,
 			//text, html
 			property: 'text',
 			element: 'textarea',
@@ -88,47 +90,68 @@ context.InPlaceEditor = new Class({
 			var options = this.options,
 				oldValue = el.get(options.property),
 				container = new Element(options.wrapper, {'class': options.className}).inject(el, 'after'),
-				textarea = new Element(options.element, options.properties).set('value', oldValue).inject(container);
+				textarea = new Element(options.element, options.properties).set('value', oldValue).inject(container),
+				cancel = function() {
+
+					el.style.display = el.retrieve('eip-display');
+					container.destroy()
+				},
+				validate = function() {
+
+					el.style.display = el.retrieve('eip-display');
+
+					//validate input
+					if(options.validate(textarea.value) && textarea.value != oldValue) this.fireEvent('change', [el.set(options.property, textarea.value), el.get(options.property), oldValue]);
+					container.destroy()
+
+				}.bind(this);
 
 			el.setStyles({display:'none', backgroundColor: options.fColor});
 
-			//new line
-			if(options.newLine) new Element('br').inject(container);
+			if(options.buttons) {
+				
+				//new line
+				if(options.newLine) new Element('br').inject(container);
 
-			//cancel
-			container.grab(new Element('input[type=reset][value=' + options.cancelMsg + ']', {
+				//cancel
+				container.grab(new Element('a', {
 
-							events:{
-									click: function() {
+								href: 'javascript:;',
+								html: 'Cancel',
+								events:{click: cancel}
 
-									el.style.display = el.retrieve('eip-display');
-									container.destroy()
-								}
-							}
+							}));
 
-						}));
+				//seperator
+				if(options.separator) container.grab(new Element('span', {html: typeof options.separator == 'boolean' ? '&nbsp;' : options.separator}));
 
-			//seperator
-			if(options.separator) container.grab(new Element('span', {html: typeof options.separator == 'boolean' ? '&nbsp;' : options.separator}));
+				//save
+				container.grab(new Element('a', {
 
-			//save
-			container.grab(new Element('input[type=submit][value=' + options.OKMsg + ']', {
+					href: 'javascript:;', 
+					html: 'Save',
+					events: {click: validate }
 
-				events: {
+				}))
+			}
+			
+			else textarea.addEvents({
+			
+					keydown: function (e) { 
+					
+						if(e.key == 'esc') cancel()
+					},
+					blur: function() {
 
-					click: function() {
-
-						el.style.display = el.retrieve('eip-display');
+					el.style.display = el.retrieve('eip-display');
 
 						//validate input
 						if(options.validate(textarea.value) && textarea.value != oldValue) this.fireEvent('change', [el.set(options.property, textarea.value), el.get(options.property), oldValue]);
 						container.destroy()
 
 					}.bind(this)
-				}
-
-			}));
-
+				}).focus();
+				
 			return this
 		},
 		attach: function (elements) {
