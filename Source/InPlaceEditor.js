@@ -22,7 +22,7 @@ provides: [InPlaceEditor]
 ...
 */
 
-(function (context) {
+!function (context) {
 
 "use strict";
 
@@ -142,6 +142,18 @@ context.InPlaceEditor = new Class({
 					blur: function() {
 
 					el.style.display = el.retrieve('eip-display');
+				}))
+			}
+			
+			else textarea.addEvents({
+			
+					keydown: function (e) { 
+					
+						if(e.key == 'esc') cancel()
+					},
+					blur: function() {
+
+					el.style.display = el.retrieve('eip-display');
 					
 						//validate input
 						if(options.validate(textarea.value) && textarea.value != oldValue) this.fireEvent('change', [el.set(options.property, textarea.value), el.get(options.property), oldValue]);
@@ -171,4 +183,4 @@ context.InPlaceEditor = new Class({
 			return this
 		}
 	})
-})(this);
+}(this);
