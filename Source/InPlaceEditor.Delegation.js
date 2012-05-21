@@ -13,7 +13,7 @@ provides: [InPlaceEditor.Delegation]
 ...
 */
 
-(function (context) {
+!function (context) {
 
 "use strict";
 
@@ -51,4 +51,4 @@ provides: [InPlaceEditor.Delegation]
 			}
 	})
 	
-})(this);
+}(this);
