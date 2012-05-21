@@ -22,34 +22,47 @@ provides: [InPlaceEditor]
 ...
 */
 
-var InPlaceEditor = new Class({
+(function (context) {
+
+"use strict";
+
+context.InPlaceEditor = new Class({
 
 		options: {
 
 			//property: html/text
+			//editor wrapper
+			wrapper: 'span',
+			//display buttons or save on blur and cancel when pressing esc
+			buttons: true,
+			//text, html
 			property: 'text',
 			element: 'textarea',
 			toColor: "#e1ecf5",
 			fColor: "#fff",
 			newLine: true,
+			//Apply - Cancel separator
+			separator: '&nbsp;',
 			//function that take user input as parameter and return true or false to indicate whether the input is valid
 			validate: function (value) { return !!value.trim() },
 			properties: {
 
 				rows: 2,
 				cols: 32
-			}
+			},
+			className: 'inplace-edit',
+			cancelMsg: 'Cancel',
+			OKMsg: 'SAVE'
 		},
 
 		Implements: [Events, Options],
 		initialize: function() {
 
-			var params = Array.link(arguments, {options: Type.isObject, elements: function(obj) { return (obj != null) } });
+			var params = Array.link(Array.slice(arguments), {options: Type.isObject, elements: function(obj) { return (obj != null) } });
 
 			this.setOptions(params.options);
 
 			this.events = this.getEvents();
-
 			if(params.elements) this.attach(params.elements)
 		},
 
@@ -60,72 +73,90 @@ var InPlaceEditor = new Class({
 				property = 'backgroundColor';
 
 			return {
-					mouseenter: function() { this.tween(property, options.toColor) },
-					mouseleave: function() { this.tween(property, options.fColor).get('tween').chain(function () { this.setStyle(property, this.retrieve('eip-color')) }.bind(this)) },
-					click: function(e) {
+			
+						mouseenter: function() { this.tween(property, options.toColor) },
+						mouseleave: function() { this.tween(property, options.fColor).get('tween').chain(function () { this.setStyle(property, this.retrieve('eip-color')) }.bind(this)) },
+						click: function(e) {
 
-						e.stop();
-						self.build(this)
+							e.stop();
+							self.build(this)
+						}
 					}
-				}
-
 		},
 		build: function (el) {
 
 			var options = this.options,
 				oldValue = el.get(options.property),
-				container = new Element('span').injectAfter(el),
-				textarea = new Element(options.element, options.properties).set('value', oldValue).inject(container);
+				container = new Element(options.wrapper, {'class': options.className}).inject(el, 'after'),
+				textarea = new Element(options.element, options.properties).set('value', oldValue).inject(container),
+				cancel = function() {
+
+					el.style.display = el.retrieve('eip-display');
+					container.destroy()
+				},
+				validate = function() {
+
+					el.style.display = el.retrieve('eip-display');
+
+					//validate input
+					if(options.validate(textarea.value) && textarea.value != oldValue) this.fireEvent('change', [el.set(options.property, textarea.value), el.get(options.property), oldValue]);
+					container.destroy()
+
+				}.bind(this);
 
 			el.setStyles({display:'none', backgroundColor: options.fColor});
 
-			//new line
-			if(options.newLine) new Element('br').inject(container);
+			if(options.buttons) {
+				
+				//new line
+				if(options.newLine) new Element('br').inject(container);
 
-			//cancel
-			new Element('a', {
+				//cancel
+				container.grab(new Element('a', {
 
-							href: 'javascript:;',
-							html: 'Cancel',
-							events:{
-									click: function() {
+								href: 'javascript:;',
+								html: 'Cancel',
+								events:{click: cancel}
 
-									el.style.display = el.retrieve('eip-display');
-									container.destroy()
-								}
-							}
+							}));
 
-						}).inject(container);
+				//seperator
+				if(options.separator) container.grab(new Element('span', {html: typeof options.separator == 'boolean' ? '&nbsp;' : options.separator}));
 
-			//seperator
-			new Element('span', {html: '&nbsp;'}).inject(container);
+				//save
+				container.grab(new Element('a', {
 
-			//save
-			new Element('a', {
+					href: 'javascript:;', 
+					html: 'Save',
+					events: {click: validate }
 
-				href: 'javascript:;', html: 'Save',
-				events: {
+				}))
+			}
+			
+			else textarea.addEvents({
+			
+					keydown: function (e) { 
+					
+						if(e.key == 'esc') cancel()
+					},
+					blur: function() {
 
-					click: function() {
-
-						el.style.display = el.retrieve('eip-display');
-
+					el.style.display = el.retrieve('eip-display');
+					
 						//validate input
 						if(options.validate(textarea.value) && textarea.value != oldValue) this.fireEvent('change', [el.set(options.property, textarea.value), el.get(options.property), oldValue]);
 						container.destroy()
 
 					}.bind(this)
-				}
-
-			}).inject(container);
-
+				}).focus();
+				
 			return this
 		},
 		attach: function (elements) {
 
 			$$(elements).each(function (el) {
 
-				el.store('eip-color', el.getStyle('backgroundColor')).
+				el.store('eip-color', el.style.backgroundColor).
 					store('eip-display', el.style.display).
 					set({tween: {link: 'chain'}, events: this.events})
 
@@ -139,4 +170,5 @@ var InPlaceEditor = new Class({
 
 			return this
 		}
-});
+	})
+})(this);

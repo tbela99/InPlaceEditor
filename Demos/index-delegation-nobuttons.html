@@ -57,28 +57,32 @@ textarea, input[type=text] {
 	border-bottom: 1px dotted;
 	padding: 0;
 }
+.inplace-edit span {display: inline-block;}
 
 </style>
 <script type="text/javascript" src="../mootools.js"></script>
 <script type="text/javascript" src="../Source/InPlaceEditor.js"></script>
+<script type="text/javascript" src="../Source/InPlaceEditor.Delegation.js"></script>
 
 <script type="text/javascript">
 //<![CDATA[
 
 	window.addEvent('domready', function () {
 
-		new InPlaceEditor( '.text',{
+		new InPlaceEditor.Delegation('form',{
+							buttons: false,
+							relay: '.text',
 							property: 'text', 
 							onChange: function () {
 
-							
 								console.log(arguments)
 							}
 						});
-		new InPlaceEditor('.html', {
+		new InPlaceEditor.Delegation('form', {
+							buttons: false,
+							relay: '.html',
 							property: 'html', 
 							onChange: function () {
-
 							
 								console.log(arguments)
 							}

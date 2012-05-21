@@ -13,36 +13,42 @@ provides: [InPlaceEditor.Delegation]
 ...
 */
 
-InPlaceEditor.Delegation = new Class({
+(function (context) {
 
-	/*
-		options: {
+"use strict";
 
-			relay: ''
-		},
-	*/
+	context.InPlaceEditor.Delegation = new Class({
 
-		Extends: InPlaceEditor,
-		
-		getEvents: function () {
+		/*
+			options: {
 
-			var self = this,
-				options = this.options,
-				property = 'backgroundColor',
-				relay = ':relay(' + options.relay + ')';
+				relay: ''
+			},
+		*/
 
-			return [
-						function(e, el) { el.tween(property, options.toColor) },
-						function(e, el) { 
-							
-							el.tween(property, options.fColor).get('tween').chain(function () { el.setStyle(property, el.retrieve('eip-color')) }) 
-						},
-						function(e, el) {
+			Extends: context.InPlaceEditor,
+			
+			getEvents: function () {
+
+				var self = this,
+					options = this.options,
+					property = 'backgroundColor',
+					relay = ':relay(' + options.relay + ')';
+
+				return [
+							function(e, el) { el.tween(property, options.toColor) },
+							function(e, el) { 
+								
+								el.tween(property, options.fColor).get('tween').chain(function () { el.setStyle(property, el.retrieve('eip-color')) }) 
+							},
+							function(e, el) {
 
 								e.stop();
-								self.build(el)
-						}
+								self.build(el.store('eip-edit', 1))
+							}
 
-					].associate(['mouseenter' + relay, 'mouseleave' + relay, 'click' + relay])
-		}
-});
+						].associate(['mouseenter' + relay, 'mouseleave' + relay, 'click' + relay])
+			}
+	})
+	
+})(this);

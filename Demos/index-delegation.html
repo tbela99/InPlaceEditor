@@ -40,19 +40,24 @@ textarea, input[type=text] {
 	margin-bottom: 10px;
 	display: block;
 }
-.html + span a, .text + span a {
+.inplace-edit [type=submit] {
 
-	font-size: 60%;
-	text-decoration: none;
-	color: #e00;
+	border: 1px solid #ccc;
+	background: #E1DCDC;
+	color: #767474;
+	cursor: pointer;
+	font-weight: bold;
 }
-.html + span a ~ a, .text + span a ~ a {
+.inplace-edit [type=reset] {
 
-	font-size: 90%;
-	text-decoration: none;
-	color: #00e;   
-	text-transform: uppercase;
+	border: 0;
+	cursor: pointer;
+	background: transparent;
+	color: #0E7BFE;
+	border-bottom: 1px dotted;
+	padding: 0;
 }
+.inplace-edit span {display: inline-block;}
 
 </style>
 <script type="text/javascript" src="../mootools.js"></script>
@@ -69,7 +74,6 @@ textarea, input[type=text] {
 							property: 'text', 
 							onChange: function () {
 
-							
 								console.log(arguments)
 							}
 						});
@@ -77,8 +81,6 @@ textarea, input[type=text] {
 							relay: '.html',
 							property: 'html', 
 							onChange: function () {
-
-							
 								console.log(arguments)
 							}
 		
