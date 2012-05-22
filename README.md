@@ -4,7 +4,7 @@ InPlaceEditor
 In place editor with event delegation support.
 
 - [Demo](http://tbela99.github.com/InPlaceEditor/Demos/index.html)
-- [Demo with event no buttons](http://tbela99.github.com/InPlaceEditor/Demos/index-nobuttons.html)
+- [Demo with no buttons](http://tbela99.github.com/InPlaceEditor/Demos/index-nobuttons.html)
 - [Demo with event delegation](http://tbela99.github.com/InPlaceEditor/Demos/index-delegation.html)
 - [Demo with event delegation and no buttons](http://tbela99.github.com/InPlaceEditor/Demos/index-delegation-nobuttons.html)
 
