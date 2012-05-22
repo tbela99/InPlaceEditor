@@ -63,6 +63,7 @@ context.InPlaceEditor = new Class({
 			this.setOptions(params.options);
 
 			this.events = this.getEvents();
+			
 			if(params.elements) this.attach(params.elements)
 		},
 
@@ -73,7 +74,6 @@ context.InPlaceEditor = new Class({
 				property = 'backgroundColor';
 
 			return {
-			
 						mouseenter: function() { this.tween(property, options.toColor) },
 						mouseleave: function() { this.tween(property, options.fColor).get('tween').chain(function () { this.setStyle(property, this.retrieve('eip-color')) }.bind(this)) },
 						click: function(e) {
@@ -82,8 +82,10 @@ context.InPlaceEditor = new Class({
 							self.build(this)
 						}
 					}
+
 		},
 		build: function (el) {
+
 
 			var options = this.options,
 				oldValue = el.get(options.property),
@@ -117,7 +119,6 @@ context.InPlaceEditor = new Class({
 								href: 'javascript:;',
 								html: 'Cancel',
 								events:{click: cancel}
-
 							}));
 
 				//seperator
@@ -129,7 +130,6 @@ context.InPlaceEditor = new Class({
 					href: 'javascript:;', 
 					html: 'Save',
 					events: {click: validate }
-
 				}))
 			}
 			
@@ -142,19 +142,7 @@ context.InPlaceEditor = new Class({
 					blur: function() {
 
 					el.style.display = el.retrieve('eip-display');
-				}))
-			}
-			
-			else textarea.addEvents({
-			
-					keydown: function (e) { 
-					
-						if(e.key == 'esc') cancel()
-					},
-					blur: function() {
 
-					el.style.display = el.retrieve('eip-display');
-					
 						//validate input
 						if(options.validate(textarea.value) && textarea.value != oldValue) this.fireEvent('change', [el.set(options.property, textarea.value), el.get(options.property), oldValue]);
 						container.destroy()
@@ -179,8 +167,9 @@ context.InPlaceEditor = new Class({
 		detach: function (elements) {
 
 			$$(elements).removeEvents(this.events);
-
 			return this
 		}
 	})
+	
 }(this);
+
