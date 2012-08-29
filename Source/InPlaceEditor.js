@@ -93,12 +93,12 @@ context.InPlaceEditor = new Class({
 				textarea = new Element(options.element, options.properties).set('value', oldValue).inject(container),
 				cancel = function() {
 
-					el.style.display = el.retrieve('eip-display');
+					el.style.display = el.retrieve('eip-display', '');
 					container.destroy()
 				},
 				validate = function() {
 
-					el.style.display = el.retrieve('eip-display');
+					el.style.display = el.retrieve('eip-display', '');
 
 					//validate input
 					if(options.validate(textarea.value) && textarea.value != oldValue) this.fireEvent('change', [el.set(options.property, textarea.value), el.get(options.property), oldValue]);
@@ -141,7 +141,7 @@ context.InPlaceEditor = new Class({
 					},
 					blur: function() {
 
-					el.style.display = el.retrieve('eip-display');
+					el.style.display = el.retrieve('eip-display', '');
 
 						//validate input
 						if(options.validate(textarea.value) && textarea.value != oldValue) this.fireEvent('change', [el.set(options.property, textarea.value), el.get(options.property), oldValue]);
