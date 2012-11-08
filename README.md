@@ -6,7 +6,7 @@ In place editor with <select> and event delegation support.
 - [Demo](http://tbela99.github.com/InPlaceEditor/Demos/index.html)
 - [Demo with no buttons](http://tbela99.github.com/InPlaceEditor/Demos/index-nobuttons.html)
 - [Demo with options](http://tbela99.github.com/InPlaceEditor/Demos/index-options.html)
-- [Demo with options and no buttons](http://tbela99.github.com/InPlaceEditor/Demos/index-delegation-nobuttons.html)
+- [Demo with options and no buttons](http://tbela99.github.com/InPlaceEditor/Demos/index-options-delegation-nobuttons.html)
 - [Demo with event delegation](http://tbela99.github.com/InPlaceEditor/Demos/index-delegation.html)
 - [Demo with event delegation and no buttons](http://tbela99.github.com/InPlaceEditor/Demos/index-delegation-nobuttons.html)
 
