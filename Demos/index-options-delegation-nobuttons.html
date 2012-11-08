@@ -62,6 +62,7 @@ textarea, input[type=text] {
 </style>
 <script type="text/javascript" src="../mootools.js"></script>
 <script type="text/javascript" src="../Source/InPlaceEditor.js"></script>
+<script type="text/javascript" src="../Source/InPlaceEditor.Options.js"></script>
 <script type="text/javascript" src="../Source/InPlaceEditor.Delegation.js"></script>
 
 <script type="text/javascript">
@@ -70,16 +71,22 @@ textarea, input[type=text] {
 	window.addEvent('domready', function () {
 
 		new InPlaceEditor.Delegation('form',{
+							buttons: false,
 							relay: '.text',
-							property: 'text', 
+							property: 'text', 	
+							options: [1, 4, 7],
 							onChange: function () {
 
 								console.log(arguments)
 							}
 						});
+						
 		new InPlaceEditor.Delegation('form', {
+							buttons: false,
 							relay: '.html',
 							property: 'html', 
+							getInput: function (el) { return el.getNext() },
+							options: [{value: 1, text: 'I\'m fine'}, {value: 0, text: 'I\'m not fine'}, {value: 2, text: 'I\'m just okay'}],
 							onChange: function () {
 							
 								console.log(arguments)
@@ -93,7 +100,7 @@ textarea, input[type=text] {
        
 			<div class="text">edit text</div>
 			<div class="text">edit text too</div>
-			<div class="html"><span>edit HTML</span></div>
-			<div class="html"><span>edit HTML too</span></div>
+			<div class="html" data-inplace-options="[{value: 0, text: 'list from data attribute'}, {value: 1, text: 'option 2'}, {value: 2, text: 'another option'}]"><span>edit HTML</span></div><input type="hidden">
+			<div class="html"><span>edit HTML too</span></div><input type="hidden">
 		</form>
 </body></html>

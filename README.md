@@ -1,10 +1,12 @@
 InPlaceEditor
 ============
 
-In place editor with event delegation support.
+In place editor with <select> and event delegation support.
 
 - [Demo](http://tbela99.github.com/InPlaceEditor/Demos/index.html)
-- [Demo with event no buttons](http://tbela99.github.com/InPlaceEditor/Demos/index-nobuttons.html)
+- [Demo with no buttons](http://tbela99.github.com/InPlaceEditor/Demos/index-nobuttons.html)
+- [Demo with options](http://tbela99.github.com/InPlaceEditor/Demos/index-options.html)
+- [Demo with options and no buttons](http://tbela99.github.com/InPlaceEditor/Demos/index-delegation-nobuttons.html)
 - [Demo with event delegation](http://tbela99.github.com/InPlaceEditor/Demos/index-delegation.html)
 - [Demo with event delegation and no buttons](http://tbela99.github.com/InPlaceEditor/Demos/index-delegation-nobuttons.html)
 
@@ -52,7 +54,7 @@ or this way, you can attach elements later
 ## InPlaceEditor Options:
 
 - wrapper - (*string*, optional) HTML tag for the editor wrapper. default to *span*
-- buttons - (*boolean*, optional) display save and cancel buttons. default to true. if set to false, input is saved on blur or cancelled if the user press *esc*
+- buttons - (*boolean*, optional) display save and cancel buttons. default to true. if set to false, input is saved on blur or cancelled if the validation fails or the user press *esc*
 - property - (*string*, optional) element property to edit. possible values are *text* and *html*. default to *text*
 - element - (*string*, optional) editor HTML tag. possible values as *input*, *textarea*. default to *textarea*
 - toColor - (*string*, optional) when the mouse enter the element, change its background color to this value
@@ -63,6 +65,20 @@ or this way, you can attach elements later
 - className - (*string*, optional) class name for the editor wrapper. default to *inplace-edit*.
 - cancelMsg - (*string*, optional) value of the cancel button. default to *cancel*
 - OKMsg - (*string*, optional) value of the OK button. default to *SAVE*
+
+		
+## InPlaceEditor.Delegation Options:
+
+- relay - (*string*) selector for the nodes that will be edited
+
+		
+## InPlaceEditor.Options Options:
+
+- value - (*string*, optional) if options are object then this is the name of the property used as value. default to *'value'*
+- text - (*string*, optional) if options are object then this is the name of the property used as text. default to *'text'*
+- getInput - (*function*, optional) return the element that will store the value of the selected option. if defined, the editable element will display the selected text
+- inputProperty - (*text*, optional) name of the input property
+- options - (*array*) array of options. alternatively you can specify options using data attribute *data-inplace-options* of the element or the input
 
 
 ## InPlaceEditor Events:
