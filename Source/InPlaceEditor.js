@@ -22,11 +22,13 @@ provides: [InPlaceEditor]
 ...
 */
 
-!function (context) {
+!function (window) {
 
 "use strict";
 
-context.InPlaceEditor = new Class({
+	function wrapper() {
+	
+		return new Class({
 
 		options: {
 
@@ -44,7 +46,7 @@ context.InPlaceEditor = new Class({
 			//Apply - Cancel separator
 			separator: '&nbsp;',
 			//function that take user input as parameter and return true or false to indicate whether the input is valid
-			validate: function (value) { return !!value.trim() },
+			validate: function (value) { return ('' + value).trim() !== '' },
 			properties: {
 
 				rows: 2,
@@ -139,15 +141,7 @@ context.InPlaceEditor = new Class({
 					
 						if(e.key == 'esc') cancel()
 					},
-					blur: function() {
-
-					el.style.display = el.retrieve('eip-display', '');
-
-						//validate input
-						if(options.validate(textarea.value) && textarea.value != oldValue) this.fireEvent('change', [el.set(options.property, textarea.value), el.get(options.property), oldValue]);
-						container.destroy()
-
-					}.bind(this)
+					blur: validate.bind(this)
 				}).focus();
 				
 			return this
@@ -170,6 +164,10 @@ context.InPlaceEditor = new Class({
 			return this
 		}
 	})
-	
+	}
+
+	if(typeof define == 'function' && define.amd) define(wrapper);
+	else window.InPlaceEditor = wrapper();
+		
 }(this);
 
