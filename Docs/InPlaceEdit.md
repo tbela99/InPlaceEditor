@@ -15,7 +15,7 @@ In place editor
 - validate - (*function*, optional) function that validates user input, return true if the input is valid.
 - className - (*string*, optional) class name for the editor wrapper. default to *inplace-edit*
 - cancelMsg - (*string*, optional) value of the cancel button. default to *cancel*
-- OKMsg - (*string*, optional) value of the OK button. default to *SAVE*
+- okMsg - (*string*, optional) value of the OK button. default to *SAVE*
 
 
 # InPlaceEditor Events:
