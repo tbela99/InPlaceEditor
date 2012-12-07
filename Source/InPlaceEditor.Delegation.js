@@ -33,7 +33,7 @@ provides: [InPlaceEditor.Delegation]
 			getEvents: function (el) {
 
 				var self = this,
-					options = Object.append({}, this.options, el && el.data()),
+					options = Object.merge({}, this.options, el && el.data()),
 					property = 'backgroundColor',
 					relay = ':relay(' + options.relay + ')';
 
@@ -83,6 +83,6 @@ provides: [InPlaceEditor.Delegation]
 	}
 
 	if(typeof define == 'function' && define.amd) define(['./InPlaceEditor'], wrapper);
-	else wrapper(window.InPlaceEditor)
+	else wrapper(InPlaceEditor)
 
 }(this);

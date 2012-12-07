@@ -1,28 +1,16 @@
 <!DOCTYPE HTML>
 <html xmlns="http://www.w3.org/1999/xhtml"><head>
-
-
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-<title>InPlaceEditor</title>
-
-<link rel="stylesheet" type="text/css" href="demo.css">
+<title>InPlaceEditor</title><link rel="stylesheet" type="text/css" href="demo.css">
 <script type="text/javascript" src="../mootools.js"></script>
 <script type="text/javascript" src="../mootools/Element.Data.js"></script>
 <script type="text/javascript" src="../Source/InPlaceEditor.js"></script>
-<script type="text/javascript" src="../Source/InPlaceEditor.Delegation.js"></script>
-
-<script type="text/javascript">
-//<![CDATA[
-
-	window.addEvent('domready', function () {
-
-		new InPlaceEditor.Delegation('form',{
+<script type="text/javascript" src="../Source/InPlaceEditor.Delegation.js"></script><script type="text/javascript">
+//<![CDATA[	window.addEvent('domready', function () {		new InPlaceEditor.Delegation('form',{
 							buttons: false,
 							relay: '.text',
 							property: 'text', 
-							onChange: function () {
-
-								console.log(arguments)
+							onChange: function () {								console.log(arguments)
 							}
 						});
 		new InPlaceEditor.Delegation('form', {
