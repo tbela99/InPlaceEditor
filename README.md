@@ -142,7 +142,7 @@ and use it later with
 
 or with data api
 
-	<div data-validator="required even">
+	<div data-validate="required even">
 
 or you can still use the old fashioned style
 
